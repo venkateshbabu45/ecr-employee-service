@@ -18,18 +18,7 @@ pipeline {
         sh 'echo whoami'
       }
     }
-    stage('Docker Build') {
-      steps {
-        sh '/usr/bin/docker build -t employee-service .'
-      }
-    }   
-    stage('push image to ECR'){
-      steps {
-        withDockerRegistry(credentialsId: 'ecr:us-east-1:aws-credentials', url: 'http://508607970941.dkr.ecr.us-east-1.amazonaws.com/employee-service') {
-          sh 'docker tag employee-service:latest 508607970941.dkr.ecr.us-east-1.amazonaws.com/employee-service:latest'
-         sh 'docker push 508607970941.dkr.ecr.us-east-1.amazonaws.com/employee-service:latest'
-        } 
-      }
+      
     }
     
   }
